@@ -69,10 +69,10 @@ public class SignupController {
 		try {
 			if (signUpService.isExistByMobileNumber(userDto.getMobileNumber())) {
 				System.out.println("phone");
-				MessageHelper.addErrorAttribute(ra, "user.save.phone.exist");
+				MessageHelper.addErrorAttribute(ra, "Mobile number is exist in database. Change another one!");
 			}else if(signUpService.isExistByEmail(userDto.getEmail())) {
 				System.out.println("phone");
-				MessageHelper.addErrorAttribute(ra, "user.save.email.exist");
+				MessageHelper.addErrorAttribute(ra, "Email is exist in database. Try another one!");
 			}else {
 				User user = new User();
 				BeanUtils.copyProperties(userDto, user);
@@ -97,7 +97,7 @@ public class SignupController {
 			}
 		}
 		catch (Exception e) {
-			MessageHelper.addErrorAttribute(ra, "user.save.error");
+			MessageHelper.addErrorAttribute(ra, "Error");
 		}
 
 		return "redirect:signup/";

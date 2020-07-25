@@ -8,7 +8,6 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @SpringBootApplication
-//@EnableAutoConfiguration
 public class RegistrationFormApplication {
 
 	public static void main(String[] args) {

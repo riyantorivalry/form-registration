@@ -26,7 +26,7 @@
     <th:block th:if="${message != null}">
         <div th:replace="fragments/components :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}})">Alert</div>
     </th:block>
-    <fieldset  th:disabled="${message == success}">
+    <fieldset  th:disabled="${message == success && message != null}">
         <legend>Registration</legend>
         <div class="form-group" align="center">
             <div class="col-xs-12">
