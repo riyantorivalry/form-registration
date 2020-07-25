@@ -50,7 +50,6 @@ public class SignupController {
 		SignupForm form = new SignupForm();
 		model.addAttribute(form);
 		if (Ajax.isAjaxRequest(requestedWith)) {
-			System.out.println("ajax");
 			return SIGNUP_VIEW_NAME.concat(" :: signupForm");
 		}
 		model.addAttribute("enableSignup", false);
@@ -60,18 +59,14 @@ public class SignupController {
 
 	@PostMapping("signup")
 	public String save( @Valid @ModelAttribute SignupForm userDto, Errors errors, RedirectAttributes ra, Model model) throws Exception {
-		System.out.println("userDto : "+userDto.toString());
 		if (errors.hasErrors()) {
-			System.out.println("error");
 			MessageHelper.addErrorAttribute(ra, "error");
 			return SIGNUP_VIEW_NAME;
 		}
 		try {
 			if (signUpService.isExistByMobileNumber(userDto.getMobileNumber())) {
-				System.out.println("phone");
 				MessageHelper.addErrorAttribute(ra, "Mobile number is exist in database. Change another one!");
 			}else if(signUpService.isExistByEmail(userDto.getEmail())) {
-				System.out.println("phone");
 				MessageHelper.addErrorAttribute(ra, "Email is exist in database. Try another one!");
 			}else {
 				User user = new User();
@@ -93,7 +88,6 @@ public class SignupController {
 				model.addAttribute("enableSignup", false);
 				model.addAttribute("enableLogin", true);
 				MessageHelper.addSuccessAttribute(ra, "success");
-				System.out.println("saved: " + saveNewUser);
 			}
 		}
 		catch (Exception e) {
