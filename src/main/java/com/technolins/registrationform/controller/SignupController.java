@@ -10,7 +10,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,14 +39,6 @@ public class SignupController {
 		return "signup";
 	}
 
-	//	@ModelAttribute("listgender")
-	//	public Map<Integer, String> listGender() {
-	//		Map<Integer, String> gender = new HashMap<>();
-	//		gender.put(0,"Female");
-	//		gender.put(1,"Male");
-	//
-	//		return gender;
-	//	}
 	@ModelAttribute("listgender")
 	public List<Gender> listGender() {
 
@@ -59,22 +50,20 @@ public class SignupController {
 		SignupForm form = new SignupForm();
 		model.addAttribute(form);
 		if (Ajax.isAjaxRequest(requestedWith)) {
+			System.out.println("ajax");
 			return SIGNUP_VIEW_NAME.concat(" :: signupForm");
 		}
+		model.addAttribute("enableSignup", false);
+		model.addAttribute("enableLogin", true);
 		return SIGNUP_VIEW_NAME;
 	}
 
 	@PostMapping("signup")
-	public String save( @Valid @ModelAttribute SignupForm userDto, Errors errors, RedirectAttributes ra, BindingResult bindingResult) throws Exception {
+	public String save( @Valid @ModelAttribute SignupForm userDto, Errors errors, RedirectAttributes ra, Model model) throws Exception {
 		System.out.println("userDto : "+userDto.toString());
 		if (errors.hasErrors()) {
 			System.out.println("error");
 			MessageHelper.addErrorAttribute(ra, "error");
-			return SIGNUP_VIEW_NAME;
-		}
-		if(bindingResult.hasErrors()) {
-			System.out.println("error f");
-			MessageHelper.addErrorAttribute(ra, "error field");
 			return SIGNUP_VIEW_NAME;
 		}
 		try {
@@ -90,7 +79,6 @@ public class SignupController {
 				Date now = new Date();
 				user.setId(1L);
 				user.setDateOfBirth(now);
-				//				user.setGender(1);
 				user.setCreatedDate(now);
 				user.setCreatedBy("SYSTEM");
 				user.setCreatedTerminal("127.0.0.1");
@@ -102,7 +90,9 @@ public class SignupController {
 					e.getStackTrace();
 				}
 
-				MessageHelper.addSuccessAttribute(ra, "user.save.success");
+				model.addAttribute("enableSignup", false);
+				model.addAttribute("enableLogin", true);
+				MessageHelper.addSuccessAttribute(ra, "success");
 				System.out.println("saved: " + saveNewUser);
 			}
 		}

@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="adm_user")
 public class User extends BaseEntity{
@@ -34,6 +36,24 @@ public class User extends BaseEntity{
 	private String email;
 	@Column(name="gender", nullable=true)
 	private Integer gender;
+
+	//############### FOR AUDIT ########################
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
+	@Temporal(TemporalType.DATE)
+	@Column(name="created_date", nullable=true)
+	protected Date createdDate;
+	@Column(name="created_by", nullable=true)
+	protected String createdBy;
+	@Column(name="created_terminal", nullable=true)
+	protected String createdTerminal;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss.SSS")
+	@Temporal(TemporalType.DATE)
+	@Column(name="update_date", nullable=true)
+	protected Date modifiedDate;
+	@Column(name="update_by", nullable=true)
+	protected String modifiedBy;
+	@Column(name="update_terminal", nullable=true)
+	protected String modifiedTerminal;
 
 	public User() {
 		super();
@@ -93,6 +113,67 @@ public class User extends BaseEntity{
 	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
+
+	@Override
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	@Override
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	@Override
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	@Override
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@Override
+	public String getCreatedTerminal() {
+		return createdTerminal;
+	}
+
+	@Override
+	public void setCreatedTerminal(String createdTerminal) {
+		this.createdTerminal = createdTerminal;
+	}
+
+	@Override
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	@Override
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	@Override
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	@Override
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
+	}
+
+	@Override
+	public String getModifiedTerminal() {
+		return modifiedTerminal;
+	}
+
+	@Override
+	public void setModifiedTerminal(String modifiedTerminal) {
+		this.modifiedTerminal = modifiedTerminal;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -26,7 +26,7 @@
     <th:block th:if="${message != null}">
         <div th:replace="fragments/components :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}})">Alert</div>
     </th:block>
-    <fieldset>
+    <fieldset  th:disabled="${message == success}">
         <legend>Registration</legend>
         <div class="form-group" align="center">
             <div class="col-xs-12">
@@ -41,92 +41,98 @@
             	<span class="help-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect name</span>
                 <input type="text" class="form-control" id="lastName" placeholder="Last name" th:field="*{lastName}" required oninvalid="this.setCustomValidity('Please fill this field.')"/>
             </div>
-			<div class="dateDropdown">
-			    <div class="col-xs-12">
+<!--             <div class="form-group">
+            <div class="btn-group">
+				  <button type="button" class="btn btn-danger">Action</button>
+				  <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    <span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <div class="dropdown-menu">
+				    <a class="dropdown-item" href="#">Action</a>
+				    <a class="dropdown-item" href="#">Another action</a>
+				    <a class="dropdown-item" href="#">Something else here</a>
+				    <div class="dropdown-divider"></div>
+				    <a class="dropdown-item" href="#">Separated link</a>
+				  </div>
+			</div>
+			</div> -->
+			<div class="dropdown col-xs-12" align="left">
 				<select class="day" th:field="*{day}">
-					<option value="1">1</option>
-					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
-					<option value="7">7</option>
-					<option value="8">8</option>
-					<option value="9">9</option>
-					<option value="10">10</option>
-					<option value="11">11</option>
-					<option value="12">12</option>
-					<option value="13">13</option>
-					<option value="14">14</option>
-					<option value="15">15</option>
-					<option value="16">16</option>
-					<option value="17">17</option>
-					<option value="18">18</option>
-					<option value="19">19</option>
-					<option value="20">20</option>
-					<option value="21">21</option>
-					<option value="22">22</option>
-					<option value="23">23</option>
-					<option value="24">24</option>
-					<option value="25">25</option>
-					<option value="26">26</option>
-					<option value="27">27</option>
-					<option value="28">28</option>
-					<option value="29">29</option>
-					<option value="30">30</option>
+					<option th:value="1" th:text="1"></option>
+					<option th:value="2" th:text="2"></option>
+					<option th:value="3" th:text="3"></option>
+					<option th:value="4" th:text="4"></option>
+					<option th:value="5" th:text="5"></option>
+					<option th:value="6" th:text="6"></option>
+					<option th:value="7" th:text="7"></option>
+					<option th:value="8" th:text="8"></option>
+					<option th:value="9" th:text="9"></option>
+					<option th:value="10" th:text="10"></option>
+					<option th:value="11" th:text="11"></option>
+					<option th:value="12" th:text="12"></option>
+					<option th:value="13" th:text="13"></option>
+					<option th:value="14" th:text="14"></option>
+					<option th:value="15" th:text="15"></option>
+					<option th:value="16" th:text="16"></option>
+					<option th:value="17" th:text="17"></option>
+					<option th:value="18" th:text="18"></option>
+					<option th:value="19" th:text="19"></option>
+					<option th:value="20" th:text="20"></option>
+					<option th:value="21" th:text="21"></option>
+					<option th:value="22" th:text="22"></option>
+					<option th:value="23" th:text="23"></option>
+					<option th:value="24" th:text="24"></option>
+					<option th:value="25" th:text="25"></option>
+					<option th:value="26" th:text="26"></option>
+					<option th:value="27" th:text="27"></option>
+					<option th:value="28" th:text="28"></option>
+					<option th:value="29" th:text="29"></option>
+					<option th:value="30" th:text="30"></option>
 				</select>
 				<select class="month" th:field="*{month}">
-					<option value="Jan">Jan</option>
-					<option value="Feb">Feb</option>
-					<option value="Mar">Mar</option>
-					<option value="Apr">Apr</option>
-					<option value="May">May</option>
-					<option value="Jun">Jun</option>
-					<option value="Jul">Jul</option>
-					<option value="Aug">Aug</option>
-					<option value="Sept">Sept</option>
-					<option value="Oct">Oct</option>
-					<option value="Nov">Nov</option>
-					<option value="Dec">Dec</option>
+					<option th:value="Jan">Jan</option>
+					<option th:value="Feb">Feb</option>
+					<option th:value="Mar">Mar</option>
+					<option th:value="Apr">Apr</option>
+					<option th:value="May">May</option>
+					<option th:value="Jun">Jun</option>
+					<option th:value="Jul">Jul</option>
+					<option th:value="Aug">Aug</option>
+					<option th:value="Sept">Sept</option>
+					<option th:value="Oct">Oct</option>
+					<option th:value="Nov">Nov</option>
+					<option th:value="Dec">Dec</option>
 				</select>
 					<select class="year" th:field="*{year}">
-					<option value="2020">2021</option>
-					<option value="2021">2020</option>
-					<option value="2022">2019</option>
-					<option value="2023">2018</option>
-					<option value="2024">2019</option>
-					<option value="2025">2025</option>
-					<option value="2026">2026</option>
-					<option value="2027">2027</option>
-					<option value="2028">2028</option>
-					<option value="2029">2029</option>
-					<option value="2030">2030</option>
-					<option value="2031">2031</option>
-					<option value="2032">2032</option>
-					<option value="2033">2033</option>
-					<option value="2034">2034</option>
-					<option value="2035">2035</option>
-					<option value="2036">2036</option>
-					<option value="2037">2037</option>
-					<option value="2038">2038</option>
-					<option value="2039">2039</option>
-					<option value="2040">2040</option>
+					<option th:value="2020">2021</option>
+					<option th:value="2021">2020</option>
+					<option th:value="2022">2019</option>
+					<option th:value="2023">2018</option>
+					<option th:value="2024">2019</option>
+					<option th:value="2025">2025</option>
+					<option th:value="2026">2026</option>
+					<option th:value="2027">2027</option>
+					<option th:value="2028">2028</option>
+					<option th:value="2029">2029</option>
+					<option th:value="2030">2030</option>
+					<option th:value="2031">2031</option>
+					<option th:value="2032">2032</option>
+					<option th:value="2033">2033</option>
+					<option th:value="2034">2034</option>
+					<option th:value="2035">2035</option>
+					<option th:value="2036">2036</option>
+					<option th:value="2037">2037</option>
+					<option th:value="2038">2038</option>
+					<option th:value="2039">2039</option>
+					<option th:value="2040">2040</option>
 				</select>
 				</div>
-				</div>
             <form >
-            <div class="form-row" align="left">
-             <ul>
-             <li th:each="item : ${listgender}">
+            <div class="form-row col-xs-12" align="left">
+             <ul th:each="item : ${listgender}">
              	<input type="radio" th:field="*{gender}" th:value="${item.id}" />
                 <label th:for="${item}" th:text="${item.name}"></label>
-                <!-- <div class="col-xs-12 ">  -->
-						 <!--  <input class="form-check-input" type="radio" id="male" name="gender" value="male">
-						  <label class="form-check-label" for="male">Male</label><br> -->
-				 <!-- </div> --> 
-              </li>
-             </ul>
-                  
+             </ul> 
             </div> 
             </form>
             <div class="col-xs-12">
@@ -135,12 +141,15 @@
             </div>
             <div class="col-xs-12">
                 <button type="submit" class="btn col-xs-8 col-sm-9 col-md-12">Register</button>
-            </div>
+            </div>    
         </div>
     </fieldset>
+  <th:block th:if="${message != success}">
     <div class="col-xs-12">
-         <button type="submit" class="btn col-xs-8 col-sm-9 col-md-12"  href="signin" th:href="@{/signin/}">Login</button>
+    <a href="form" th:href="@{/signin/}" class="btn col-xs-8 col-sm-9 col-md-12"><span class="btn col-xs-8 col-sm-9 col-md-12" >Login</span></a>
+<!--          <button class="btn col-xs-8 col-sm-9 col-md-12" href="http://localhost:8181/signin/" >Login</a> -->
     </div>
+    </th:block>
 </form>
 </div> <!-- end container -->
 <div th:replace="fragments/layout :: footer"></div>

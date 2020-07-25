@@ -9,7 +9,7 @@ public class SignupForm {
 	private String firstName;
 	@NotEmpty
 	private String lastName;
-	@Pattern(regexp = "^[+]62+[0-9]", message = "Please enter valid Indonesian phone number")
+	@Pattern(regexp = "^[+]62+[0-9]*", message = "Please enter valid Indonesian phone number")
 	private String mobileNumber;
 	private String day;
 	private String month;
