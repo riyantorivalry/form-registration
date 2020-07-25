@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">        
+    <link rel="shortcut icon" href="ui-resources/images/favicon.ico" th:href="@{/favicon.ico}" type="image/x-icon">
+	<link rel="icon" href="ui-resources/images/favicon.ico" th:href="@{/favicon.ico}" type="image/x-icon">
+    
+    <title th:text="#{view.signup.title}">Sign Up</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="ui-resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/ui-resources/css/bootstrap.min.css}"/>
+    <link href="ui-resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/ui-resources/css/core.css}" />
+    <script src="ui-resources/js/jquery.min.js" th:src="@{/ui-resources/js/jquery.min.js}"></script>
+    <script src="ui-resources/js/bootstrap.min.js" th:src="@{/ui-resources/js/bootstrap.min.js}"></script>
+    <style>input[type=text], .txtarea{
+		margin-bottom: 30px;}
+ 	</style>
+</head>
+<body>
+<div class="container">
+<form class="form-narrow form-horizontal" method="post" th:action="@{/signup}" th:object="${signupForm}" th:fragment="signupForm">
+    <th:block th:if="${message != null}">
+        <div th:replace="fragments/components :: alert (type=${#strings.toLowerCase(message.type)}, message=#{${message.message}})">Alert</div>
+    </th:block>
+    <fieldset>
+        <legend>Registration</legend>
+        <div class="form-group" align="center">
+            <div class="col-xs-12">
+                <span class="help-block" th:if="${#fields.hasErrors('mobileNumber')}" th:errors="*{mobileNumber}">Incorrect email</span>
+                <input type="text" class="form-control" id="mobileNumber" placeholder="Mobile number" th:field="*{mobileNumber}" required oninvalid="this.setCustomValidity('Please fill this field.')"/>
+            </div>
+            <div class="col-xs-12">
+            	<span class="help-block" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Incorrect name</span>
+                <input type="text" class="form-control" id="firstName" placeholder="First name" th:field="*{firstName}" required oninvalid="this.setCustomValidity('Please fill this field.')"/>
+            </div>
+            <div class="col-xs-12">
+            	<span class="help-block" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Incorrect name</span>
+                <input type="text" class="form-control" id="lastName" placeholder="Last name" th:field="*{lastName}" required oninvalid="this.setCustomValidity('Please fill this field.')"/>
+            </div>
+			<div class="dateDropdown">
+			    <div class="col-xs-12">
+				<select class="day" th:field="*{day}">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+					<option value="26">26</option>
+					<option value="27">27</option>
+					<option value="28">28</option>
+					<option value="29">29</option>
+					<option value="30">30</option>
+				</select>
+				<select class="month" th:field="*{month}">
+					<option value="Jan">Jan</option>
+					<option value="Feb">Feb</option>
+					<option value="Mar">Mar</option>
+					<option value="Apr">Apr</option>
+					<option value="May">May</option>
+					<option value="Jun">Jun</option>
+					<option value="Jul">Jul</option>
+					<option value="Aug">Aug</option>
+					<option value="Sept">Sept</option>
+					<option value="Oct">Oct</option>
+					<option value="Nov">Nov</option>
+					<option value="Dec">Dec</option>
+				</select>
+					<select class="year" th:field="*{year}">
+					<option value="2020">2021</option>
+					<option value="2021">2020</option>
+					<option value="2022">2019</option>
+					<option value="2023">2018</option>
+					<option value="2024">2019</option>
+					<option value="2025">2025</option>
+					<option value="2026">2026</option>
+					<option value="2027">2027</option>
+					<option value="2028">2028</option>
+					<option value="2029">2029</option>
+					<option value="2030">2030</option>
+					<option value="2031">2031</option>
+					<option value="2032">2032</option>
+					<option value="2033">2033</option>
+					<option value="2034">2034</option>
+					<option value="2035">2035</option>
+					<option value="2036">2036</option>
+					<option value="2037">2037</option>
+					<option value="2038">2038</option>
+					<option value="2039">2039</option>
+					<option value="2040">2040</option>
+				</select>
+				</div>
+				</div>
+            <form >
+            <div class="form-row" align="left">
+             <ul>
+             <li th:each="item : ${listgender}">
+             	<input type="radio" th:field="*{gender}" th:value="${item.id}" />
+                <label th:for="${item}" th:text="${item.name}"></label>
+                <!-- <div class="col-xs-12 ">  -->
+						 <!--  <input class="form-check-input" type="radio" id="male" name="gender" value="male">
+						  <label class="form-check-label" for="male">Male</label><br> -->
+				 <!-- </div> --> 
+              </li>
+             </ul>
+                  
+            </div> 
+            </form>
+            <div class="col-xs-12">
+                <span class="help-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect email</span>
+                <input type="text" class="form-control" id="email" placeholder="Email" th:field="*{email}" required oninvalid="this.setCustomValidity('Please fill this field.')"/>
+            </div>
+            <div class="col-xs-12">
+                <button type="submit" class="btn col-xs-8 col-sm-9 col-md-12">Register</button>
+            </div>
+        </div>
+    </fieldset>
+    <div class="col-xs-12">
+         <button type="submit" class="btn col-xs-8 col-sm-9 col-md-12"  href="signin" th:href="@{/signin/}">Login</button>
+    </div>
+</form>
+</div> <!-- end container -->
+<div th:replace="fragments/layout :: footer"></div>
+
+<script type="text/javascript">
+        var s,
+      DateWidget = {
+        settings: {
+          months: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sept','Oct','Nov','Dec'],
+          day: new Date().getUTCDate(),
+          currMonth: new Date().getUTCMonth(),
+          currYear: new Date().getUTCFullYear(),
+          yearOffset: 21,
+          containers: $(".dateDropdown")
+        },
+
+        init: function() {
+          s = this.settings;
+          DW = this;
+          s.containers.each(function(){
+            DW.removeFallback(this);
+            DW.createSelects(this);
+            DW.populateSelects(this);
+            DW.initializeSelects(this);
+            DW.bindUIActions();
+          })
+        },
+
+        getDaysInMonth: function(month, year) {
+           return new Date(year, month, 0).getDate();
+        },
+
+        addDays: function(daySelect, numDays){
+          $(daySelect).empty();
+
+          for(var i = 0; i < numDays; i++){
+            $("<option />")
+              .text(i + 1)
+              .val(i + 1)
+              .appendTo(daySelect);
+          }
+        },
+
+        addMonths: function(monthSelect){
+          for(var i = 0; i < 12; i++){
+            $("<option />")
+              .text(s.months[i])
+              .val(s.months[i])
+              .appendTo(monthSelect);
+          }
+        },
+
+        addYears: function(yearSelect){
+          for(var i = 0; i < s.yearOffset; i++){
+            $("<option />")
+              .text(i + s.currYear)
+              .val(i + s.currYear)
+              .appendTo(yearSelect);
+          }
+        },
+
+        removeFallback: function(container) {
+          $(container).empty();
+        },
+
+        createSelects: function(container) {
+          $("<select class='day'>").appendTo(container);
+          $("<select class='month'>").appendTo(container);
+          $("<select class='year'>").appendTo(container);
+        },
+
+        populateSelects: function(container) {
+          DW.addDays($(container).find('.day'), DW.getDaysInMonth(s.currMonth, s.currYear));
+          DW.addMonths($(container).find('.month'));
+          DW.addYears($(container).find('.year'));
+        },
+
+        initializeSelects: function(container) {
+          $(container).find('.day').val(s.day);
+          $(container).find('.currMonth').val(s.month);
+          $(container).find('.currYear').val(s.year);
+        },
+
+        bindUIActions: function() {
+          $(".month").on("change", function(){
+            var daySelect = $(this).prev(), 
+                yearSelect = $(this).next(),
+                month = s.months.indexOf($(this).val()) + 1,
+                days = DW.getDaysInMonth(month, yearSelect.val());
+            DW.addDays(daySelect, days);
+          });
+
+          $(".year").on("change", function(){
+            var daySelect = $(this).prev().prev(), 
+                monthSelect = $(this).prev(),
+                month = s.months.indexOf(monthSelect.val()) + 1,
+                days = DW.getDaysInMonth(month, $(this).val());
+            DW.addDays(daySelect, days);
+          });
+        }
+      };
+
+      DateWidget.init();
+    </script>
+</body>
+</html>

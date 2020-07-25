@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link href="ui-resources/css/bootstrap.min.css" rel="stylesheet"
+	media="screen" th:href="@{/ui-resources/css/bootstrap.min.css}" />
+</head>
+<body>
+	<footer class="footer text-muted" th:fragment="footer">
+		<div class="container">
+			<!-- <span th:utext="#{footer.copyright}">PT. IT Solutions</span> - <span
+				th:utext="#{footer.appName}">MyApp</span> - <span
+				th:text="${@environment.getProperty('app.version')}">1.0.0</span> -->
+				<span>PT. Technolins Indonesia</span> - <span>Registration Form App</span> - <span>1.0.0</span>
+		</div>
+	</footer>
+
+</body>
+</html>
